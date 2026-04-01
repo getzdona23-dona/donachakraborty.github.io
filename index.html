@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dona Chakraborty – Senior Product Leader</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0055cc;
+    --blue-light: #e8f0fe;
+    --blue-mid: #3b7dd8;
+    --dark: #1a1a2e;
+    --text: #2d2d2d;
+    --muted: #6b7280;
+    --bg: #f7f8fc;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --accent: #f0a500;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .header-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0055cc 0%, #1a1a2e 100%);
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+  .header-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10,20,50,0.52);
+    z-index: 1;
+  }
+  .header-content {
+    position: relative;
+    z-index: 2;
+    padding: 60px 24px 40px;
+    width: 100%;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  header .subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #ffffff;
+    opacity: 0.92;
+    margin-bottom: 6px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+  header a.li-link {
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  header a.li-link:hover { border-color: var(--accent); }
+
+  /* ── HAMBURGER NAV ── */
+  .nav-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--dark);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .nav-bar {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px;
+    height: 54px;
+  }
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    border: none;
+    background: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--dark);
+    padding: 8px 0 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-menu.open { display: flex; }
+  .nav-menu a {
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+  .nav-menu a:hover,
+  .nav-menu a.active {
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+    border-left-color: var(--accent);
+  }
+  .lang-toggle {
+    display: flex;
+    gap: 8px;
+    padding: 12px 28px 4px;
+  }
+  .lang-btn {
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--dark);
+    font-weight: 500;
+  }
+
+  /* ── MAIN ── */
+  main { max-width: 860px; margin: 0 auto; padding: 36px 20px 60px; }
+  .page { display: none; }
+  .page.active { display: block; }
+  .lang-section { display: none; }
+  .lang-section.active { display: block; }
+
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    border: 1px solid var(--border);
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    color: var(--blue);
+    font-size: 1.5rem;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--blue-light);
+  }
+  p { margin-bottom: 14px; }
+
+  /* Experience */
+  .exp-item { padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  .exp-role { font-weight: 500; font-size: 1rem; color: var(--dark); }
+  .exp-company { color: var(--blue); font-size: 0.9rem; font-weight: 500; }
+  .exp-date {
+    font-size: 0.82rem; color: var(--muted);
+    background: var(--blue-light); padding: 2px 10px;
+    border-radius: 20px; white-space: nowrap;
+  }
+  .exp-desc { font-size: 0.92rem; color: var(--muted); margin-top: 4px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .tag {
+    background: var(--blue-light); color: var(--blue);
+    font-size: 0.78rem; padding: 3px 12px;
+    border-radius: 20px; font-weight: 500;
+  }
+
+  /* Travel gallery */
+  .travel-intro { font-size: 0.95rem; color: var(--muted); margin-bottom: 20px; }
+  .photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .photo-slot {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: var(--blue-light);
+    border: 1px solid var(--border);
+  }
+  .photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px; margin-top: 8px;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px; background: var(--bg);
+    border-radius: 10px; border: 1px solid var(--border);
+    text-decoration: none; color: var(--text); transition: box-shadow 0.2s;
+  }
+  .contact-item:hover { box-shadow: 0 4px 12px rgba(0,85,204,0.12); }
+  .ci-icon { font-size: 1.4rem; }
+  .ci-label { font-size: 0.78rem; color: var(--muted); }
+  .ci-value { font-size: 0.9rem; font-weight: 500; color: var(--blue); }
+
+  .page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem; color: var(--dark); margin-bottom: 24px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; overflow: hidden;
+    min-height: 90px; display: flex;
+    align-items: center; justify-content: center;
+  }
+  .footer-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0055cc 100%);
+    background-size: cover; background-position: center bottom; z-index: 0;
+  }
+  .footer-overlay { position: absolute; inset: 0; background: rgba(10,20,50,0.52); z-index: 1; }
+  .footer-content { position: relative; z-index: 2; padding: 28px 20px; width: 100%; text-align: center; }
+  footer p { color: rgba(255,255,255,0.85); font-size: 0.82rem; text-shadow: 0 1px 4px rgba(0,0,0,0.4); margin: 0; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .card { padding: 20px 18px; }
+    .exp-header { flex-direction: column; }
+    .photo-gallery { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg" id="header-bg"></div>
+  <div class="header-overlay"></div>
+  <div class="header-content">
+    <h1>Dona Chakraborty</h1>
+    <p class="subtitle">Sr Product manager with a French edge—connecting global markets through language and innovation</p>
+    <a href="https://www.linkedin.com/in/dona-c-918ba761/" target="_blank" class="li-link">Connect on LinkedIn →</a>
+  </div>
+</header>
+
+<div class="nav-wrapper">
+  <div class="nav-bar">
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-menu" id="navMenu">
+    <a href="#" onclick="showPage('experience')" class="active" id="nav-experience">My Work Experience</a>
+    <a href="#" onclick="showPage('afterwork')" id="nav-afterwork">What I Like After Work</a>
+    <a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">English</button>
+      <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">Français</button>
+    </div>
+  </nav>
+</div>
+
+<main>
+
+  <div class="page active" id="page-experience">
+    <p class="page-title">My Work Experience</p>
+    <div class="card">
+      <div class="lang-section active" id="experience-en">
+        <h2>Career Journey</h2>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><div class="exp-role">Product Owner</div><div class="exp-company">Michelin – Automotive Digital Platforms</div></div>
+            <span class="exp-date">Recent</span>
+          </div>
+          <p class="exp-desc">Led digital product strategy across automotive platforms. Streamlined customer journey and dealer alignment for a global tyre manufacturer.Worked on tire promotions.</p>
+          <div class="tags"><span class="tag">Product Strategy</span><span class="tag">Automotive</span><span class="tag">Digital Platforms</span></div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><div class="exp-role">Service Account Manager</div><div class="exp-company">eRevMax – Enterprise SaaS (Hotel Tech)</div></div>
+            <span class="exp-date">SaaS</span>
+          </div>
+          <p class="exp-desc">Focused on retention, activation, and expansion across hotel technology SaaS products. Optimised revenue and operational efficiency for global hotel chains in Europe and Middle East.</p>
+          <div class="tags"><span class="tag">SaaS</span><span class="tag">Hotel Tech</span><span class="tag">Retention</span><span class="tag">Activation</span></div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><div class="exp-role">Product / Business Analyst</div><div class="exp-company">Wipro / TCS / HCL / Genpact – Enterprise IT</div></div>
+            <span class="exp-date">IT Services</span>
+          </div>
+          <p class="exp-desc">Worked across large-scale enterprise IT delivery, business analysis, and service account management across multiple industries.</p>
+          <div class="tags"><span class="tag">Enterprise IT</span><span class="tag">Business Analysis</span><span class="tag">Delivery</span></div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><div class="exp-role">Senior Analyst – Fraud &amp; Support</div><div class="exp-company">HSBC – Banking</div></div>
+            <span class="exp-date">Banking</span>
+          </div>
+          <p class="exp-desc">	Customer support optimisation, and revenue protection in financial services.</p>
+          <div class="tags"><span class="tag">Banking</span><span class="tag">Fraud Prevention</span><span class="tag">Operations</span></div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><div class="exp-role">Ecommerce Roles</div><div class="exp-company">FMCG / Ecommerce</div></div>
+            <span class="exp-date">Earlier</span>
+          </div>
+          <p class="exp-desc">Fraud prevention, rapid experimentation for performance gains, and driving measurable sales impact.</p>
+          <div class="tags"><span class="tag">FMCG</span><span class="tag">Ecommerce</span><span class="tag">Campaigns</span></div>
+        </div>
+      </div>
+  <div class="page active" id="page-experience">
+    <p class="page-title">Expérience Professionnelle</p>
+    <div class="card">
+      <div class="lang-section active" id="experience-fr">
+      
+      <div class="lang-section" id="experience-fr">
+        <h2>Parcours professionnel</h2>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><div class="exp-role">Senior Product Manager</div><div class="exp-company">Michelin – Plateformes numériques automobiles</div></div>
+            <span class="exp-date">Récent</span>
+          </div>
+          <p class="exp-desc">Pilotage de la stratégie produit numérique. Rationalisation du parcours client et alignement des concessionnaires pour un fabricant mondial de pneumatiques.</p>
+          <div class="tags"><span class="tag">Stratégie produit</span><span class="tag">Automobile</span><span class="tag">Numérique</span></div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><div class="exp-role">Product Leader</div><div class="exp-company">eRevMax – SaaS hôtelier</div></div>
+            <span class="exp-date">SaaS</span>
+          </div>
+          <p class="exp-desc">Focus sur la rétention, l'activation et l'expansion des produits SaaS hôteliers. Optimisation des revenus et de l'efficacité opérationnelle.</p>
+          <div class="tags"><span class="tag">SaaS</span><span class="tag">Hôtellerie</span><span class="tag">Rétention</span></div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><div class="exp-role">Analyste Produit / Business</div><div class="exp-company">Wipro / TCS / HCL / Genpact – IT Entreprise</div></div>
+            <span class="exp-date">IT</span>
+          </div>
+          <p class="exp-desc">Livraison IT à grande échelle, analyse commerciale et gestion de comptes de service.</p>
+          <div class="tags"><span class="tag">IT Entreprise</span><span class="tag">Analyse</span><span class="tag">Livraison</span></div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><div class="exp-role">Analyste Senior – Fraude &amp; Support</div><div class="exp-company">HSBC – Banque</div></div>
+            <span class="exp-date">Banque</span>
+          </div>
+          <p class="exp-desc">Prévention de la fraude, optimisation du support client et protection des revenus en services financiers.</p>
+          <div class="tags"><span class="tag">Banque</span><span class="tag">Fraude</span><span class="tag">Opérations</span></div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><div class="exp-role">Rôles Campagnes &amp; E-commerce</div><div class="exp-company">FMCG / E-commerce</div></div>
+            <span class="exp-date">Antérieur</span>
+          </div>
+          <p class="exp-desc">Gestion de campagnes, expérimentation rapide et impact commercial mesurable.</p>
+          <div class="tags"><span class="tag">FMCG</span><span class="tag">E-commerce</span><span class="tag">Campagnes</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <div class="page" id="page-afterwork">
+    <p class="page-title">What I Like After Work</p>
+    <div class="card">
+      <div class="lang-section active" id="afterwork-en">
+        <h2>Travelling & Art</h2>
+        <p class="travel-intro">Exploring new places and creating art is what recharges me. Here are some of my favourite moments.</p>
+        
+        <div class="photo-gallery">
+          <div class="photo-slot"><img src="travel1.jpg" alt="Snowy Travels"></div>
+          <div class="photo-slot"><img src="travel2.jpg" alt="Mountain View"></div>
+          <div class="photo-slot"><img src="travel3.jpg" alt="Lakeside"></div>
+          <div class="photo-slot"><img src="art1.jpg" alt="My Painting"></div>
+        </div>
+      </div>
+
+      <div class="lang-section" id="afterwork-fr">
+        <h2>Voyages et Art</h2>
+        <p class="travel-intro">Explorer de nouveaux endroits et créer de l'art est ce qui me ressource.</p>
+        <div class="photo-gallery">
+          <div class="photo-slot"><img src="travel1.jpg" alt="Voyage"></div>
+          <div class="photo-slot"><img src="travel2.jpg" alt="Montagne"></div>
+          <div class="photo-slot"><img src="travel3.jpg" alt="Lac"></div>
+          <div class="photo-slot"><img src="art1.jpg" alt="Peinture"></div>
+        </div>
+   
+      <div class="lang-section" id="afterwork-fr">
+        <h2>Les voyages</h2>
+        <p class="travel-intro">Explorer de nouveaux endroits, cultures et perspectives — c'est ce qui me ressource. Voici quelques-uns de mes moments préférés à travers le monde.</p>
+        <div class="photo-gallery">
+          <div class="photo-slot"><img src="WhatsApp Image 2026-03-25 at 12.24.07 AM.jpeg" alt="Photo de voyage 1"></div>
+          <div class="photo-slot"><img src="WhatsApp Image 2026-03-25 at 12.23.02 AM.jpeg" alt="Photo de voyage 2"></div>
+          <div class="photo-slot"><img src="WhatsApp Image 2026-03-25 at 12.20.15 AM.jpeg" alt="Photo de voyage 3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-contact">
+    <p class="page-title">Contact</p>
+    <div class="card">
+      <div class="lang-section active" id="contact-en">
+        <h2>Get in touch</h2>
+        <p>I'm open to consulting conversations, and interesting cross-industry problems. Feel free to reach out.</p>
+        <div class="contact-grid">
+          <a href="mailto:getz.dona23@gmail.com" class="contact-item">
+            <span class="ci-icon">✉️</span>
+            <div><div class="ci-label">Email</div><div class="ci-value">getz.dona23@gmail.com</div></div>
+          </a>
+          <a href="https://www.linkedin.com/in/dona-c-918ba761/" target="_blank" class="contact-item">
+            <span class="ci-icon">💼</span>
+            <div><div class="ci-label">LinkedIn</div><div class="ci-value">dona-c-918ba761</div></div>
+          </a>
+        </div>
+      </div>
+      <div class="lang-section" id="contact-fr">
+        <h2>Me contacter</h2>
+        <p>Je suis ouverte aux conversations de conseil et aux problèmes inter-secteurs intéressants. N'hésitez pas à me contacter.</p>
+        <div class="contact-grid">
+          <a href="mailto:getz.dona23@gmail.com" class="contact-item">
+            <span class="ci-icon">✉️</span>
+            <div><div class="ci-label">Email</div><div class="ci-value">getz.dona23@gmail.com</div></div>
+          </a>
+          <a href="https://www.linkedin.com/in/dona-c-918ba761/" target="_blank" class="contact-item">
+            <span class="ci-icon">💼</span>
+            <div><div class="ci-label">LinkedIn</div><div class="ci-value">dona-c-918ba761</div></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-bg" id="footer-bg"></div>
+  <div class="footer-overlay"></div>
+  <div class="footer-content">
+    <p>© 2026 Dona Chakraborty &nbsp;|&nbsp; <a href="mailto:getz.dona23@gmail.com">getz.dona23@gmail.com</a></p>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('navMenu').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+
+  function showPage(page) {
+    ['experience','afterwork','contact'].forEach(function(p) {
+      document.getElementById('page-' + p).classList.remove('active');
+      document.getElementById('nav-' + p).classList.remove('active');
+    });
+    document.getElementById('page-' + page).classList.add('active');
+    document.getElementById('nav-' + page).classList.add('active');
+    document.getElementById('navMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function setLang(lang) {
+    document.querySelectorAll('.lang-section').forEach(function(s) { s.classList.remove('active'); });
+    document.querySelectorAll('[id$="-' + lang + '"]').forEach(function(t) {
+      if (t.classList.contains('lang-section')) t.classList.add('active');
+    });
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  }
+</script>
+</body>
+</html>
